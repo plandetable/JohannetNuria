@@ -292,9 +292,11 @@ animation:pulse 2s infinite;
 
 <div id="planContainer">
 <p style="color:#C8A96A;">📍 Encontre a sua mesa</p>
-<div style="position:relative;">
+
+<div id="planWrapper" style="position:relative;">
 <img src="plan.png" style="width:100%; border-radius:12px;">
 </div>
+
 </div>
 
 <button id="reset" class="reset">Nova pesquisa</button>
@@ -413,24 +415,24 @@ highlightTable(table);
 
 function highlightTable(table){
 
-let container = document.querySelector("#planContainer div");
+let container = document.getElementById("planWrapper");
 
 let old = document.querySelector(".highlight");
 if(old) old.remove();
 
 let positions = {
 
-1:{x:11.8,y:10.8},   2:{x:31.5,y:16.2},   3:{x:65.2,y:15.8},   4:{x:88.2,y:10.8},
+1:{x:12,y:12},   2:{x:30,y:18},   3:{x:70,y:18},   4:{x:88,y:12},
 
-5:{x:11.8,y:26.8},   6:{x:31.5,y:32.2},   7:{x:65.2,y:31.8},   8:{x:88.2,y:26.8},
+5:{x:12,y:28},   6:{x:30,y:34},   7:{x:70,y:34},   8:{x:88,y:28},
 
-9:{x:11.8,y:42.8},   10:{x:31.5,y:48.2},  11:{x:65.2,y:47.8},  12:{x:88.2,y:42.8},
+9:{x:12,y:44},   10:{x:30,y:50},  11:{x:70,y:50},  12:{x:88,y:44},
 
-13:{x:11.8,y:58.8},  14:{x:31.5,y:64.2},  15:{x:65.2,y:63.8},  16:{x:88.2,y:58.8},
+13:{x:12,y:60},  14:{x:30,y:66},  15:{x:70,y:66},  16:{x:88,y:60},
 
-17:{x:11.8,y:74.8},  18:{x:31.5,y:80.2},  19:{x:65.2,y:79.8},  20:{x:88.2,y:74.8},
+17:{x:12,y:76},  18:{x:30,y:82},  19:{x:70,y:82},  20:{x:88,y:76},
 
-21:{x:11.8,y:90.5},  22:{x:31.5,y:95.5},  23:{x:65.2,y:95.0},  24:{x:88.2,y:90.5}
+21:{x:12,y:92},  22:{x:30,y:96},  23:{x:70,y:96},  24:{x:88,y:92}
 
 };
 
