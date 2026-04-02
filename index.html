@@ -9,6 +9,8 @@
 
 <style>
 
+/* 🌿 BACKGROUND */
+
 body{
 margin:0;
 font-family:'Manrope', sans-serif;
@@ -16,12 +18,13 @@ display:flex;
 justify-content:center;
 align-items:center;
 min-height:100vh;
+min-height:100svh;
 padding:20px;
 color:#3A3A3A;
 background:linear-gradient(135deg, #f8f3ec 0%, #efe6d8 50%, #e8dccb 100%);
 }
 
-/* INTRO */
+/* 🎬 INTRO */
 
 #intro{
 position:fixed;
@@ -48,10 +51,15 @@ animation:introFade 1.8s ease forwards;
 font-family:'Playfair Display',serif;
 color:#C8A96A;
 font-size:38px;
+margin-bottom:10px;
+}
+
+.intro-content p{
+color:#7a7a7a;
+margin-bottom:35px;
 }
 
 .enter-btn{
-margin-top:20px;
 padding:14px 28px;
 border-radius:50px;
 border:1px solid #C8A96A;
@@ -74,20 +82,22 @@ opacity:0;
 pointer-events:none;
 }
 
-/* CONTAINER */
+/* 💎 CONTAINER */
 
 .container{
 width:100%;
 max-width:420px;
 background:rgba(255,255,255,0.85);
+backdrop-filter:blur(10px);
 border-radius:24px;
 box-shadow:0 20px 50px rgba(0,0,0,0.08);
 padding:24px;
 }
 
-/* PHOTO */
+/* 📸 PHOTO */
 
 .photo-container{
+position:relative;
 height:230px;
 border-radius:18px;
 overflow:hidden;
@@ -98,22 +108,34 @@ margin-bottom:20px;
 width:100%;
 height:100%;
 object-fit:cover;
+object-position:65% 30%;
+filter:brightness(1.05);
 }
 
-/* TEXT */
+.overlay{
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.2));
+}
+
+/* ✨ TITRE */
 
 h1{
 font-family:'Playfair Display',serif;
 color:#C8A96A;
 text-align:center;
+margin:10px 0;
+font-size:30px;
 }
 
 .date,.message{
 text-align:center;
 color:#6e6e6e;
+margin-bottom:15px;
 }
 
-/* INPUT */
+/* 🔎 INPUT */
 
 input{
 width:85%;
@@ -123,13 +145,44 @@ padding:14px;
 border-radius:14px;
 border:1px solid #e0d6c8;
 background:#f7f3ed;
+color:#3A3A3A;
+font-size:16px;
 }
 
-/* CARD */
+input::placeholder{
+color:#999;
+}
+
+/* 💡 SUGGESTIONS */
+
+.suggestions{
+margin-top:12px;
+background:#ffffff;
+border-radius:14px;
+opacity:0;
+transform:translateY(10px);
+transition:0.3s;
+}
+
+.suggestions.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.suggestions div{
+padding:14px;
+cursor:pointer;
+}
+
+.suggestions div:hover{
+background:#f5efe6;
+}
+
+/* 💎 CARD */
 
 .card{
-margin-top:20px;
-padding:20px;
+margin-top:25px;
+padding:22px;
 border-radius:18px;
 background:#fffdf9;
 box-shadow:0 10px 30px rgba(0,0,0,0.05);
@@ -158,7 +211,20 @@ margin-top:15px;
 border-bottom:1px solid #eee;
 }
 
-/* PLAN */
+/* 🔘 BOUTON */
+
+.reset{
+margin-top:20px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:14px;
+background:#C8A96A;
+color:white;
+display:none;
+}
+
+/* 📍 PLAN */
 
 #planContainer{
 display:none;
@@ -169,27 +235,27 @@ animation:fadeIn 0.6s ease;
 }
 
 @keyframes fadeIn{
-from{opacity:0; transform:translateY(15px);}
+from{opacity:0; transform:translateY(10px);}
 to{opacity:1; transform:translateY(0);}
 }
 
 .highlight{
 position:absolute;
-width:70px;
-height:70px;
+width:60px;
+height:60px;
 border-radius:50%;
 pointer-events:none;
 transform:translate(-50%, -50%);
 box-shadow:
 0 0 0 3px #C8A96A,
-0 0 20px rgba(200,169,106,0.6),
-0 0 40px rgba(200,169,106,0.3);
-animation:luxPulse 2s ease-in-out infinite;
+0 0 15px rgba(200,169,106,0.6),
+0 0 30px rgba(200,169,106,0.3);
+animation:pulse 2s infinite;
 }
 
-@keyframes luxPulse{
+@keyframes pulse{
 0%{transform:translate(-50%,-50%) scale(1);}
-50%{transform:translate(-50%,-50%) scale(1.15);}
+50%{transform:translate(-50%,-50%) scale(1.1);}
 100%{transform:translate(-50%,-50%) scale(1);}
 }
 
@@ -198,7 +264,6 @@ animation:luxPulse 2s ease-in-out infinite;
 
 <body>
 
-<!-- INTRO -->
 <div id="intro">
   <div class="intro-content">
     <h2>Johann & Nuria</h2>
@@ -211,29 +276,28 @@ animation:luxPulse 2s ease-in-out infinite;
 
 <div class="photo-container">
 <img src="photo.jpg" class="photo">
+<div class="overlay"></div>
 </div>
 
 <h1>Johann & Nuria</h1>
 <div class="date">3 de abril de 2026</div>
 
-<input id="search" placeholder="Digite o seu nome">
+<input id="search" placeholder="Coloque o seu nome">
 
-<div id="welcomeMessage" class="message">
-Estamos felizes em recebê-lo
-</div>
+<div id="suggestions" class="suggestions"></div>
+
+<div id="welcomeMessage" class="message">Estamos felizes por recebê-los</div>
 
 <div id="card" class="card"></div>
 
-<!-- PLAN -->
 <div id="planContainer">
-
 <p style="color:#C8A96A;">📍 Encontre a sua mesa</p>
-
 <div style="position:relative;">
 <img src="plan.png" style="width:100%; border-radius:12px;">
 </div>
-
 </div>
+
+<button id="reset" class="reset">Nova pesquisa</button>
 
 </div>
 
@@ -248,54 +312,86 @@ document.getElementById("intro").classList.add("hide");
 /* TABLES */
 
 const tables = {
-"1":["Kaelan","Ahcene","Ana","Anildo","Isaac","Chloe","Tito","Maman Nuria","Ivy"],
-"2":["Mama Filipa","Papa Nuria","Nidia","Lisandra","Thelma","Nicole","Thierry","Tia Susana","Felisberto"],
-"3":["Catia","Keano","Kayla","Nancy","Vania","Lea","Yara","Ricardo","Cintia","Cristina","Victoria"],
-"4":["Lukas","Stefan","Davi","Enzo","Zoe","Zara"],
-"5":["Gabrielle","Noah","Maelys","Mounia","Naim","Eden","Severine","Momo"],
-"6":["Tia Tania","Tia Julia","Tio Jota","Tonton Geraldo","Marie","Patrick","Tia Tanha","Tio Alex","Tia Carla","Tia Djena"],
-"7":["Gaelle","Usher","Ashley","Isaiah","Victoria","Alexis","Elijah"],
-"8":["Thaïs","Rayan","Anais","Lenira","Ivan","Marcio","Assia","Filipe","Adriano","Gerson"],
-"9":["Emma","Victoire","Agnès","Oceane","Noah","Ana","Anthony","Ode","Maxence"],
-"10":["Evangeliste Gianny","Helena","Laura","Naomi","Noemi","Oceanne","Priscillia","Sheryne","Laeticia","Cynthia"],
-"11":["Enzo","Isaac","Guillith","Jordan","Esther","Joelle","Asayah","Manassé","Jackson","Anicia"],
-"12":["Christopher","Aya","Mohammed","Dj Chris","Deejay 13"],
-"13":["Tonton Alain","Tata Chantal","Marie Agathe","Marie Pascal","Kylian","Tonton Thierry","Tata Raissa","Everdy","Grace","Stephane"],
-"14":["Maman Johann","Pierre","Stella","Peddy","Papa Johann","Axel","Ahcena","Lili","Massita","Charles"],
-"15":["Tata Julienne","Tata Florence","Krysdil","Krysen","Mamso","Tonton Alain","Jean-Baptiste","Kenny","Eni","Cassandra","Tonton Toussaint"],
-"16":["Arnaud","Jack","Achoua","Priya","Jules","Johan","Siva","Fatou"],
-"17":["Deborah","Christal","Kevin","Pasteur Jean Daniel","Servante Elise","Jugrace","Roberta","Servante Honorée","Edwyn","Odelie","Gaspard"],
-"18":["Jonathan","Naomie","Ronald","Silvio","Aby","Noemie Legendre","Tycia","Sarah Kibongui","Romuald","Anderson","Eldy"],
-"19":["William","Aaron","Wildan","Tiphanie","Sandra","Nancy","Junior","Emeraude","Gerielle","Grace Julia","Yannis"],
-"20":["Diaconesse Rosette","Diacre Larden","Shanice","Pasteur Deodat Babingui","Pasteure Lauriane Babingui","Pasteure Laure","Eline","Eliakim","Diacre Jacky","Diaconesse Mauly","Rose"],
-"21":["Helea","Samantha","Kyslie","Maria K","Sarah K","Marie","Nacera","Stacy","Sephora","Aurelie"],
-"22":["David","Jayce","Tony","Keellion","Leonel","Curtis","Mohamed Aziz","Nico","Kendy","Daniel","Clément"],
-"23":["Ines","Benoit","Tom","Fredo","Chloe","Alicia","Renée","Manoella","Jeanette"],
-"24":["Andrea","Dylan","Edison","Emmanuel","Florian","Jean Jerry","Jeff","Leny","Milhane","Yannis","Ulrich"]
+"1":["Jacques","Achea","Arnaud","Viviane","Keshawn","Naomie","Joy","Mireille","Tonton Faustin","Martin"],
+"2":["Maman Johann","Pierre","Stella","Peddy","Papa Johann","Axel","Assena","Limania","Massita","Alfred Koudou"],
+"3":["Kaelan","Ahcene","Ana Cruz","Anildo","Isaac Fernandes Ramos","Chloe Fernandes Ramos","Tito","Maman Nuria","Ivy"],
+"4":["Catia","Keano","Kayla","Nancy Soares Gomes","Vania","Lea","Yara","Cintia","Vitória","Cristina"],
+"5":["Tata Julienne","Tata Chantal","Tonton Alain","Marie Agathe","Marie Pascale","Kylian","Stephane","Keny","Enny","Tonton Toussaint"],
+"6":["Tonton Thierry","Tata Raissa","Josué Everdy","Grace","Jean-Baptiste","Mamso","Krisdyl","Kricen","Tata Florence","Tonton Christian"],
+"7":["Mama Filipa","Papa Nuria","Nidia","Gerson","Thaïs","Anais","Adriano","Marcio","Ivan","Tia Susana","Felisberto"],
+"8":["Nicole","Lisandra","Thelma","Lenira","Lukas","Enzo Monteiro","Davi","Zoe","Zara","Thierry"],
+"9":["Jonathan","Naomie Mupala","Ronald Mupala","Silvio","Aby","Noemie Legendre","Tycia","Sarah Kibongui","Romuald","Anderson","Eldy"],
+"10":["Mr Mamet","Stephane Ganessin","Priya Ganessin","Jules","Johan","Mme Mamet","Yofa","Fatou","Lois","Elise"],
+"11":["Gabrielle","Noah de Bourqueney","Maelys","Mounia","Momo","Eden","Severine"],
+"12":["Filipe","Rayan","Tio Jota","Tonton Geraldo","Marie Monteiro","Patrick","Tia Tanha","Tio Alex","Tia Carla","Tia Djena","Assia"],
+"13":["Diaconesse Rosette","Diacre Larden","Shanice","Pasteur Deodat","Pasteure Lauriane","Pasteure Laure","Eline","Eliakim","Diacre Jacky","Diaconesse Mauly","Rose"],
+"14":["Deborah","Christal","Kevin","Gaspard","Natacha","Jugrace","Roberta","Edwyn","Odelie"],
+"15":["Isaiah Da Veiga","Cassandra","Servante Elise","Pasteur Jean Daniel","Usher","Ashley","Isaiah Koné","Victoria","Alexis","Gaelle","Elijah"],
+"16":["David","Tony","Clément","Keellion","Leonel","Curtis","Mohamed Aziz","Nico","Kendy","Daniel","Jayce"],
+"17":["Evangeliste Gianny","Helena","Laura","Naomi","Noemi","Oceanne","Priscillia","Sheryne","Laeticia","Cynthia"],
+"18":["William","Aaron","Wildan","Tiphanie","Sandra","Nancy Lambe","Junior","Emeraude","Gerielle","Grace Julia","Yannis Tehoué"],
+"19":["Emma","Victoire","Agnès","Oceane","Noah Belise","Ana Oliveira Fortes","Anthony","Ode","Maxence"],
+"20":["Ines","Benoit","Joseph","Louis","Fredo Yotshi","Chloe Yotshi","Alicia","Renée","Manoella","Jeanette"],
+"21":["Andrea","Dylan","Edison","Emmanuel Tokobe","Florian","Jean Jerry","Jeff","Leny","Milhane","Yannis Gatariki","Ulrich"],
+"22":["Helea","Samantha","Kyslie","Maria Kikevel","Sarah Kikevel","Marie Munganga","Aurelie","Nacera","Stacy","Sephora"],
+"23":["Enzo Toubé","Isaac Massamba","Guillith","Jordan","Esther","Joelle","Asayah","Manassé","Jackson","Anicia"],
+"24":["Christopher","Aya","Mohammed","Mike","Dj Chris","Dj 13"]
 };
 
 const input = document.getElementById("search");
+const suggestions = document.getElementById("suggestions");
 const card = document.getElementById("card");
+const reset = document.getElementById("reset");
+
+let allGuests = Object.values(tables).flat();
 
 input.addEventListener("input", () => {
 
 let value = input.value.toLowerCase();
 
-card.innerHTML="";
+suggestions.innerHTML="";
+suggestions.classList.remove("show");
 card.classList.remove("show");
+card.innerHTML="";
+reset.style.display="none";
 
 if(!value) return;
 
+let matches = allGuests
+.filter(name => name.toLowerCase().includes(value))
+.slice(0,5);
+
+matches.forEach(name=>{
+let div=document.createElement("div");
+div.textContent=name;
+div.onclick=()=>showResult(name);
+suggestions.appendChild(div);
+});
+
+if(matches.length){
+suggestions.classList.add("show");
+}
+
+});
+
+function showResult(name){
+
+input.value=name;
+
+document.getElementById("search").style.display = "none";
+document.getElementById("welcomeMessage").style.display = "none";
+
+suggestions.innerHTML="";
+suggestions.classList.remove("show");
+
 for(let table in tables){
 
-let match = tables[table].find(n => n.toLowerCase().includes(value));
+if(tables[table].includes(name)){
 
-if(match){
+let others=tables[table].filter(n=>n!==name);
 
-let others = tables[table].filter(n => n !== match);
-
-card.innerHTML = `
-💌 Prazer em recebê-lo <span class="gold">${match}</span><br><br>
+card.innerHTML=`
+💌 Prazer em recebê-lo <span class="gold">${name}</span><br><br>
 🍽️ Mesa <span class="gold">${table}</span>
 
 <div class="grid">
@@ -304,43 +400,58 @@ ${others.map(n=>`<div class="name">${n}</div>`).join("")}
 `;
 
 card.classList.add("show");
+reset.style.display="block";
 
-document.getElementById("planContainer").style.display = "block";
+document.getElementById("planContainer").style.display="block";
+highlightTable(table);
 
-highlightTableOnPlan(table);
-
-break;
-}
 }
 
-});
+}
 
-/* HIGHLIGHT */
+}
 
-function highlightTableOnPlan(tableNumber){
+function highlightTable(table){
 
 let container = document.querySelector("#planContainer div");
 
-let existing = document.querySelector(".highlight");
-if(existing) existing.remove();
+let old = document.querySelector(".highlight");
+if(old) old.remove();
 
 let positions = {
-1:{x:10,y:10}, 2:{x:25,y:18}, 3:{x:70,y:18}, 4:{x:90,y:10},
-5:{x:10,y:28}, 6:{x:25,y:35}, 7:{x:70,y:35}, 8:{x:90,y:28},
-9:{x:10,y:45}, 10:{x:25,y:52}, 11:{x:70,y:52}, 12:{x:90,y:45},
-13:{x:10,y:62}, 14:{x:25,y:69}, 15:{x:70,y:69}, 16:{x:90,y:62},
-17:{x:10,y:79}, 18:{x:25,y:86}, 19:{x:70,y:86}, 20:{x:90,y:79},
-21:{x:10,y:96}, 22:{x:25,y:100}, 23:{x:70,y:100}, 24:{x:90,y:96}
+1:{x:10,y:10},2:{x:25,y:18},3:{x:70,y:18},4:{x:90,y:10},
+5:{x:10,y:28},6:{x:25,y:35},7:{x:70,y:35},8:{x:90,y:28},
+9:{x:10,y:45},10:{x:25,y:52},11:{x:70,y:52},12:{x:90,y:45},
+13:{x:10,y:62},14:{x:25,y:69},15:{x:70,y:69},16:{x:90,y:62},
+17:{x:10,y:79},18:{x:25,y:86},19:{x:70,y:86},20:{x:90,y:79},
+21:{x:10,y:96},22:{x:25,y:100},23:{x:70,y:100},24:{x:90,y:96}
 };
 
-let highlight = document.createElement("div");
-highlight.className = "highlight";
+let h = document.createElement("div");
+h.className="highlight";
 
-highlight.style.left = positions[tableNumber].x + "%";
-highlight.style.top = positions[tableNumber].y + "%";
+h.style.left = positions[table].x+"%";
+h.style.top = positions[table].y+"%";
 
-container.appendChild(highlight);
+container.appendChild(h);
 }
+
+reset.onclick=()=>{
+input.value="";
+card.innerHTML="";
+card.classList.remove("show");
+suggestions.innerHTML="";
+suggestions.classList.remove("show");
+reset.style.display="none";
+
+document.getElementById("planContainer").style.display="none";
+
+let h=document.querySelector(".highlight");
+if(h) h.remove();
+
+document.getElementById("search").style.display = "block";
+document.getElementById("welcomeMessage").style.display = "block";
+};
 
 </script>
 
