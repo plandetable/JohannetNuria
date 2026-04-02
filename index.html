@@ -239,25 +239,7 @@ from{opacity:0; transform:translateY(10px);}
 to{opacity:1; transform:translateY(0);}
 }
 
-.highlight{
-position:absolute;
-width:48px;
-height:48px;
-border-radius:50%;
-pointer-events:none;
-transform: translate(-55%, -60%);
-box-shadow:
-0 0 0 3px #C8A96A,
-0 0 15px rgba(200,169,106,0.6),
-0 0 30px rgba(200,169,106,0.3);
-animation:pulse 2s infinite;
-}
 
-@keyframes pulse{
-0%{transform:translate(-50%,-50%) scale(1);}
-50%{transform:translate(-50%,-50%) scale(1.1);}
-100%{transform:translate(-50%,-50%) scale(1);}
-}
 
 </style>
 </head>
@@ -413,55 +395,7 @@ highlightTable(table);
 
 }
 
-function highlightTable(table){
 
-let container = document.getElementById("planWrapper");
-
-let old = document.querySelector(".highlight");
-if(old) old.remove();
-
-let positions = {
-
-1:{x:12,y:11},
-2:{x:30,y:17},
-3:{x:66,y:16},
-4:{x:88,y:11},
-
-5:{x:12,y:27},
-6:{x:30,y:33},
-7:{x:66,y:32},
-8:{x:88,y:27},
-
-9:{x:12,y:43},
-10:{x:30,y:49},
-11:{x:66,y:48},
-12:{x:88,y:43},
-
-13:{x:12,y:59},
-14:{x:30,y:65},
-15:{x:66,y:64},
-16:{x:88,y:59},
-
-17:{x:12,y:75},
-18:{x:30,y:81},
-19:{x:66,y:80},
-20:{x:88,y:75},
-
-21:{x:12,y:91},
-22:{x:30,y:96},
-23:{x:66,y:95},
-24:{x:88,y:91}
-
-};
-
-let h = document.createElement("div");
-h.className="highlight";
-
-h.style.left = positions[table].x+"%";
-h.style.top = positions[table].y+"%";
-
-container.appendChild(h);
-}
 
 reset.onclick=()=>{
 input.value="";
