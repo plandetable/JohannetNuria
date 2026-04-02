@@ -9,8 +9,6 @@
 
 <style>
 
-/* 🌿 BACKGROUND */
-
 body{
 margin:0;
 font-family:'Manrope', sans-serif;
@@ -18,16 +16,12 @@ display:flex;
 justify-content:center;
 align-items:center;
 min-height:100vh;
-min-height:100svh;
 padding:20px;
-
 color:#3A3A3A;
-
-background:
-linear-gradient(135deg, #f8f3ec 0%, #efe6d8 50%, #e8dccb 100%);
+background:linear-gradient(135deg, #f8f3ec 0%, #efe6d8 50%, #e8dccb 100%);
 }
 
-/* 🎬 INTRO */
+/* INTRO */
 
 #intro{
 position:fixed;
@@ -54,15 +48,10 @@ animation:introFade 1.8s ease forwards;
 font-family:'Playfair Display',serif;
 color:#C8A96A;
 font-size:38px;
-margin-bottom:10px;
-}
-
-.intro-content p{
-color:#7a7a7a;
-margin-bottom:35px;
 }
 
 .enter-btn{
+margin-top:20px;
 padding:14px 28px;
 border-radius:50px;
 border:1px solid #C8A96A;
@@ -85,22 +74,20 @@ opacity:0;
 pointer-events:none;
 }
 
-/* 💎 CONTAINER */
+/* CONTAINER */
 
 .container{
 width:100%;
 max-width:420px;
 background:rgba(255,255,255,0.85);
-backdrop-filter:blur(10px);
 border-radius:24px;
 box-shadow:0 20px 50px rgba(0,0,0,0.08);
 padding:24px;
 }
 
-/* 📸 PHOTO */
+/* PHOTO */
 
 .photo-container{
-position:relative;
 height:230px;
 border-radius:18px;
 overflow:hidden;
@@ -111,34 +98,22 @@ margin-bottom:20px;
 width:100%;
 height:100%;
 object-fit:cover;
-object-position:65% 30%;
-filter:brightness(1.05);
 }
 
-.overlay{
-position:absolute;
-width:100%;
-height:100%;
-background:linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.2));
-}
-
-/* ✨ TITRE */
+/* TEXT */
 
 h1{
 font-family:'Playfair Display',serif;
 color:#C8A96A;
 text-align:center;
-margin:10px 0;
-font-size:30px;
 }
 
 .date,.message{
 text-align:center;
 color:#6e6e6e;
-margin-bottom:15px;
 }
 
-/* 🔎 INPUT */
+/* INPUT */
 
 input{
 width:85%;
@@ -148,44 +123,13 @@ padding:14px;
 border-radius:14px;
 border:1px solid #e0d6c8;
 background:#f7f3ed;
-color:#3A3A3A;
-font-size:16px;
 }
 
-input::placeholder{
-color:#999;
-}
-
-/* 💡 SUGGESTIONS */
-
-.suggestions{
-margin-top:12px;
-background:#ffffff;
-border-radius:14px;
-opacity:0;
-transform:translateY(10px);
-transition:0.3s;
-}
-
-.suggestions.show{
-opacity:1;
-transform:translateY(0);
-}
-
-.suggestions div{
-padding:14px;
-cursor:pointer;
-}
-
-.suggestions div:hover{
-background:#f5efe6;
-}
-
-/* 💎 CARD */
+/* CARD */
 
 .card{
-margin-top:25px;
-padding:22px;
+margin-top:20px;
+padding:20px;
 border-radius:18px;
 background:#fffdf9;
 box-shadow:0 10px 30px rgba(0,0,0,0.05);
@@ -214,17 +158,39 @@ margin-top:15px;
 border-bottom:1px solid #eee;
 }
 
-/* 🔘 BOTÃO */
+/* PLAN */
 
-.reset{
-margin-top:20px;
-width:100%;
-padding:12px;
-border:none;
-border-radius:14px;
-background:#C8A96A;
-color:white;
+#planContainer{
 display:none;
+margin-top:20px;
+text-align:center;
+position:relative;
+animation:fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(15px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+.highlight{
+position:absolute;
+width:70px;
+height:70px;
+border-radius:50%;
+pointer-events:none;
+transform:translate(-50%, -50%);
+box-shadow:
+0 0 0 3px #C8A96A,
+0 0 20px rgba(200,169,106,0.6),
+0 0 40px rgba(200,169,106,0.3);
+animation:luxPulse 2s ease-in-out infinite;
+}
+
+@keyframes luxPulse{
+0%{transform:translate(-50%,-50%) scale(1);}
+50%{transform:translate(-50%,-50%) scale(1.15);}
+100%{transform:translate(-50%,-50%) scale(1);}
 }
 
 </style>
@@ -232,7 +198,7 @@ display:none;
 
 <body>
 
-<!-- 🎬 INTRO -->
+<!-- INTRO -->
 <div id="intro">
   <div class="intro-content">
     <h2>Johann & Nuria</h2>
@@ -241,15 +207,10 @@ display:none;
   </div>
 </div>
 
-<audio id="music" preload="auto">
-  <source src="musique.mp3" type="audio/mpeg">
-</audio>
-
 <div class="container">
 
 <div class="photo-container">
 <img src="photo.jpg" class="photo">
-<div class="overlay"></div>
 </div>
 
 <h1>Johann & Nuria</h1>
@@ -257,60 +218,34 @@ display:none;
 
 <input id="search" placeholder="Digite o seu nome">
 
-<div id="suggestions" class="suggestions"></div>
-
-<div id="welcomeMessage" class="message">Estamos felizes em recebê-lo</div>
+<div id="welcomeMessage" class="message">
+Estamos felizes em recebê-lo
+</div>
 
 <div id="card" class="card"></div>
 
-<button id="reset" class="reset">Nova pesquisa</button>
+<!-- PLAN -->
+<div id="planContainer">
+
+<p style="color:#C8A96A;">📍 Encontre a sua mesa</p>
+
+<div style="position:relative;">
+<img src="plan.png" style="width:100%; border-radius:12px;">
+</div>
+
+</div>
 
 </div>
 
 <script>
 
-/* 🎧 AUDIO */
-
-function fadeInAudio(audio){
-audio.volume = 0;
-audio.play();
-
-let fade = setInterval(()=>{
-if(audio.volume < 0.6){
-audio.volume += 0.02;
-}else{
-clearInterval(fade);
-}
-},150);
-}
-
-const music = document.getElementById("music");
-
-music.addEventListener("timeupdate", () => {
-if(music.currentTime > music.duration - 2){
-let fadeOut = setInterval(()=>{
-if(music.volume > 0.05){
-music.volume -= 0.05;
-}else{
-clearInterval(fadeOut);
-music.currentTime = 0;
-fadeInAudio(music);
-}
-},100);
-}
-});
-
 /* INTRO */
 
-const intro = document.getElementById("intro");
-
 document.getElementById("enterBtn").onclick = () => {
-fadeInAudio(music);
-intro.classList.add("hide");
-setTimeout(()=>{intro.style.display="none";},1200);
+document.getElementById("intro").classList.add("hide");
 };
 
-/* DATA */
+/* TABLES */
 
 const tables = {
 "1":["Kaelan","Ahcene","Ana","Anildo","Isaac","Chloe","Tito","Maman Nuria","Ivy"],
@@ -340,59 +275,27 @@ const tables = {
 };
 
 const input = document.getElementById("search");
-const suggestions = document.getElementById("suggestions");
 const card = document.getElementById("card");
-const reset = document.getElementById("reset");
-
-let allGuests = Object.values(tables).flat();
 
 input.addEventListener("input", () => {
 
 let value = input.value.toLowerCase();
 
-suggestions.innerHTML="";
-suggestions.classList.remove("show");
-card.classList.remove("show");
 card.innerHTML="";
-reset.style.display="none";
+card.classList.remove("show");
 
 if(!value) return;
 
-let matches = allGuests
-.filter(name => name.toLowerCase().includes(value))
-.slice(0,5);
-
-matches.forEach(name=>{
-let div=document.createElement("div");
-div.textContent=name;
-div.onclick=()=>showResult(name);
-suggestions.appendChild(div);
-});
-
-if(matches.length){
-suggestions.classList.add("show");
-}
-
-});
-
-function showResult(name){
-
-input.value=name;
-
-document.getElementById("search").style.display = "none";
-document.getElementById("welcomeMessage").style.display = "none";
-
-suggestions.innerHTML="";
-suggestions.classList.remove("show");
-
 for(let table in tables){
 
-if(tables[table].includes(name)){
+let match = tables[table].find(n => n.toLowerCase().includes(value));
 
-let others=tables[table].filter(n=>n!==name);
+if(match){
 
-card.innerHTML=`
-💌 Prazer em recebê-lo <span class="gold">${name}</span><br><br>
+let others = tables[table].filter(n => n !== match);
+
+card.innerHTML = `
+💌 Prazer em recebê-lo <span class="gold">${match}</span><br><br>
 🍽️ Mesa <span class="gold">${table}</span>
 
 <div class="grid">
@@ -401,25 +304,43 @@ ${others.map(n=>`<div class="name">${n}</div>`).join("")}
 `;
 
 card.classList.add("show");
-reset.style.display="block";
 
+document.getElementById("planContainer").style.display = "block";
+
+highlightTableOnPlan(table);
+
+break;
+}
 }
 
-}
+});
 
-}
+/* HIGHLIGHT */
 
-reset.onclick=()=>{
-input.value="";
-card.innerHTML="";
-card.classList.remove("show");
-suggestions.innerHTML="";
-suggestions.classList.remove("show");
-reset.style.display="none";
+function highlightTableOnPlan(tableNumber){
 
-document.getElementById("search").style.display = "block";
-document.getElementById("welcomeMessage").style.display = "block";
+let container = document.querySelector("#planContainer div");
+
+let existing = document.querySelector(".highlight");
+if(existing) existing.remove();
+
+let positions = {
+1:{x:10,y:10}, 2:{x:25,y:18}, 3:{x:70,y:18}, 4:{x:90,y:10},
+5:{x:10,y:28}, 6:{x:25,y:35}, 7:{x:70,y:35}, 8:{x:90,y:28},
+9:{x:10,y:45}, 10:{x:25,y:52}, 11:{x:70,y:52}, 12:{x:90,y:45},
+13:{x:10,y:62}, 14:{x:25,y:69}, 15:{x:70,y:69}, 16:{x:90,y:62},
+17:{x:10,y:79}, 18:{x:25,y:86}, 19:{x:70,y:86}, 20:{x:90,y:79},
+21:{x:10,y:96}, 22:{x:25,y:100}, 23:{x:70,y:100}, 24:{x:90,y:96}
 };
+
+let highlight = document.createElement("div");
+highlight.className = "highlight";
+
+highlight.style.left = positions[tableNumber].x + "%";
+highlight.style.top = positions[tableNumber].y + "%";
+
+container.appendChild(highlight);
+}
 
 </script>
 
